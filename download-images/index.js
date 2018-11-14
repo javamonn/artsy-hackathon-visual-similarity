@@ -3,9 +3,19 @@ const fetch = require("node-fetch");
 const R = require("ramda");
 const fs = require("fs");
 const path = require("path");
+const retry = require("async-retry");
 
 const METAPHYSICS_URL = "https://metaphysics-staging.artsy.net/";
 const IMAGE_PATH = path.resolve(__dirname, "../static/images");
+const ARTIST_IDS = [
+  "pablo-picasso",
+  "andy-warhol",
+  "roy-lichtenstein",
+  "sol-lewitt",
+  "georges-braque",
+  "mark-rothko",
+  "willem-de-kooning"
+];
 
 const artistArtworksQuery = ({ artistId, size, page }) => `{
   artist(id: "${artistId}") {
@@ -30,38 +40,24 @@ const downloadImage = ({ outputPath, artworkId }, imageURL) =>
       })
   );
 
-const processResponse = res =>
-  R.pipe(
-    R.path(["artist", "artworks"]),
-    R.map(({ id, image: { image_url } }) =>
-      downloadImage(
-        {
-          artworkId: id,
-          outputPath: IMAGE_PATH
-        },
-        image_url
-      )
-    ),
-    arr => Promise.all(arr)
-  )(data);
-
 const artworkPaginator = ({ maxPage, size, artistId }) => {
   const onData = data =>
     Promise.all(
       data.map(({ id, image: { image_url } }) =>
-        downloadImage(
-          {
-            artworkId: id,
-            outputPath: IMAGE_PATH
-          },
-          image_url
+        retry(() =>
+          downloadImage(
+            {
+              artworkId: id,
+              outputPath: IMAGE_PATH
+            },
+            image_url
+          )
         )
       )
     );
   const looper = ({ page, size, artistId }) =>
-    request(
-      METAPHYSICS_URL,
-      artistArtworksQuery({ artistId, size, page })
+    retry(() =>
+      request(METAPHYSICS_URL, artistArtworksQuery({ artistId, size, page }))
     ).then(res => {
       const data = R.pathOr([], ["artist", "artworks"], res);
       return onData(data).then(() => {
@@ -74,10 +70,14 @@ const artworkPaginator = ({ maxPage, size, artistId }) => {
         }
       });
     });
-  return looper({ page: 6, size, artistId });
+  return looper({ page: 1, size, artistId });
 };
 
-artworkPaginator({ maxPage: 10, size: 100, artistId: "pablo-picasso" })
+Promise.all(
+  ARTIST_IDS.map(artistId =>
+    artworkPaginator({ maxPage: 10, size: 100, artistId })
+  )
+)
   .then(() => {
     process.exit(0);
   })

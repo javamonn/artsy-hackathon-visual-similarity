@@ -19,5 +19,5 @@ source activate 3.5
 # build tensorflow/nearest_neighbors
 (cd tensorflow && python cluster_vectors.py)
 
-mv tensorflow/nearest_neighbors/* ./static/similarity-by-artwork-id/
+mv tensorflow/nearest_neighbors ./static/similarity-by-artwork-id
 
