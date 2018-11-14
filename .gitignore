@@ -1,2 +1,4 @@
 download-images/node_modules
 static/
+tensorflow/image_to_labels.json
+tensorflow/image_vectors
