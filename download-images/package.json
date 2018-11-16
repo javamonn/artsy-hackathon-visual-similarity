@@ -14,6 +14,7 @@
     "async-retry": "^1.2.3",
     "graphql-request": "^1.8.2",
     "node-fetch": "^2.3.0",
+    "p-all": "^1.0.0",
     "ramda": "^0.25.0"
   }
 }
