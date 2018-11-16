@@ -1,0 +1,12 @@
+[submodule "externals/metaphysics"]
+	path = externals/metaphysics
+	url = https://github.com/javamonn/metaphysics
+	branch = hackathon
+[submodule "externals/reaction"]
+	path = externals/reaction
+	url = https://github.com/javamonn/reaction
+	branch = hackathon
+[submodule "externals/force"]
+	path = externals/force
+	url = https://github.com/javamonn/force
+	branch = hackathon
