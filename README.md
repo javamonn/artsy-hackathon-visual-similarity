@@ -2,7 +2,7 @@
 
 A proof-of-concept service and front-end UI for displaying a grid of "visually similar" artworks given an origin artwork.
 
-This differs from Artsy's existing recommendation services in that it operates over just the artwork image - aspects like artist, historical context, and medium, and artwork genome are not taken into account. This provides a different vector for browsing and discovery: "Show me works that contain primarily green tones" or "Show me works with sparse line work". Additionally, this provides a completely automated recommendation engine, as works do need to be manually genomed in order to appear in visual similarity results. Emerging artists may appear next to highly collected artists if their works are "visually similar".
+This differs from Artsy's existing recommendation services in that it operates over just the artwork image - aspects like artist, historical context, medium, and artwork genome are not taken into account. This enables a different vector for browsing and discovery like "Show me works that contain primarily green tones" or "Show me works with sparse line work". Additionally, this provides a completely automated recommendation engine, as works do need to be manually genomed in order to appear in visual similarity results. Emerging artists may appear next to highly collected artists if their works are "visually similar".
 
 Below are some examples of the UI and similarity results:
 
