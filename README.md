@@ -6,15 +6,15 @@ This differs from Artsy's existing recommendation services in that it operates o
 
 Below are some examples of the UI and similarity results:
 
-![screenshot 1](screenshots/screenshot-1)
+![screenshot 1](screenshots/screenshot-1.png)
 
-![screenshot 2](screenshots/screenshot-2)
+![screenshot 2](screenshots/screenshot-2.png)
 
-![screenshot 3](screenshots/screenshot-3)
+![screenshot 3](screenshots/screenshot-3.png)
 
-![screenshot 4](screenshots/screenshot-4)
+![screenshot 4](screenshots/screenshot-4.png)
 
-![screenshot 5](screenshots/screenshot-5)
+![screenshot 5](screenshots/screenshot-5.png)
 
 ## Files
 
